@@ -130,6 +130,24 @@ events.on('basket:open', () => {
 	});
 });
 
+events.on('basket:onDelete', () => {
+	const products = appData.getBasket().map((item, index) => {
+		const product = new ProductInBasketView(cloneTemplate(productInBasket), {
+			onClick: () => events.emit('product:removeFromBasket', item)
+		});
+		return product.render({
+			index: index + 1,
+			id: item.id,
+			title: item.title,
+			price: item.price
+		});
+	});
+	return basket.render({
+		products,
+		total: appData.getTotalPrice()
+	})
+})
+
 // Удаление из корзины
 events.on('product:removeFromBasket', (product: IProduct) => {
 	appData.removeProductFromBasket(product);

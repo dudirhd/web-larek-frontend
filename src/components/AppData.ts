@@ -46,8 +46,7 @@ export class AppData extends Model<IAppData> {
 
 	removeProductFromBasket(product: IProduct) {
 		this.basket = this.basket.filter(item => item !== product);
-		//чтобы полностью обновить элементы корзины
-		this.emitChanges('basket:open');
+		this.emitChanges('basket:onDelete');
 	}
 
 	getOrder() {
