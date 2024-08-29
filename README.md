@@ -12,7 +12,6 @@
 - src/pages/index.html — HTML-файл главной страницы
 - src/types/index.ts — файл с типами
 - src/index.ts — точка входа приложения
-- src/styles/styles.scss — корневой файл стилей
 - src/utils/constants.ts — файл с константами
 - src/utils/utils.ts — файл с утилитами
 
@@ -212,17 +211,17 @@ interface ISuccessActions {
 ### Cобытия приложения
 
 - `products:changed` - изменение списка продуктов
-- `basket:add-product` - добавление продукта в корзину
+- `basket:addProduct` - добавление продукта в корзину
 - `modal:open` - открытие модального окна
 - `modal:close` - закрытие модального окна
 - `product:preview` - открытие модального окна продукта
 - `basket:open` - открытие корзины
-- `basket:remove-product` - удаление продукта из корзины
-- `basket:create-order` - оформление заказа
-- `form:errors-changed` - отображение ошибок формы
+- `basket:removeProduct` - удаление продукта из корзины
+- `basket:createOrder` - оформление заказа
+- `form:errorsChanged` - отображение ошибок формы
 - `order:open` - открытие формы заказа
 - `order:clear` - очистка формы заказа
-- `order:set-payment-type` - выбор типа оплаты
+- `order:setPaymentType` - выбор типа оплаты
 
 ## Базовый код 
 

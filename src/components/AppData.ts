@@ -46,6 +46,7 @@ export class AppData extends Model<IAppData> {
 
 	removeProductFromBasket(product: IProduct) {
 		this.basket = this.basket.filter(item => item !== product);
+		//чтобы полностью обновить элементы корзины
 		this.emitChanges('basket:open');
 	}
 
@@ -60,9 +61,7 @@ export class AppData extends Model<IAppData> {
 		return this.order.address && this.order.payment;
 	}
 
-	setOrderField(field: keyof Omit<IOrder, 'items' | 'total'>, value: string) {
-		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-		// @ts-ignore
+	setOrderField(field: Exclude<keyof IOrder, 'items' | 'total'>, value: string) {
 		this.order[field] = value;
 		if (this.validateOrder(field)) {
 			this.events.emit('order:ready', this.order);

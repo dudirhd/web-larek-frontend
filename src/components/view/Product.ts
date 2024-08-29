@@ -49,7 +49,7 @@ export class ProductView extends Component<IProductView> {
 
 	set status(status: boolean) {
 		if (this._button) {
-			if(this._price.textContent === '') {
+			if(this._price.textContent === 'Бесценно') {
 				this.setText(this._button, 'Недоступно')
 				this.setDisabled(this._button, true)
 			} else {

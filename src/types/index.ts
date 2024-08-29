@@ -16,7 +16,7 @@ export interface IProduct {
 }
 
 export interface IOrder {
-	payment: number
+	payment: string
 	email: string
 	phone: string
 	address: string

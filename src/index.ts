@@ -43,6 +43,12 @@ const page = new Page(document.body, events);
 const basket = new BasketView(cloneTemplate(basketTemplate), events)
 const addressForm = new AddressView(cloneTemplate(orderTemplate), events)
 const contactsForm = new ContactsView(cloneTemplate(contactsTemplate), events)
+const success = new SuccessView(cloneTemplate(successTemplate), {
+	onClick: () => {
+		modal.close();
+		events.emit('order:clear');
+	},
+});
 
 // Дальше идут обработчики разнообразных событий, происходящих на странице
 
@@ -197,22 +203,15 @@ events.on(/(^order|^contacts):submit/, () => {
 			total: appData.getTotalPrice(),
 		})
 		.then((result) => {
-			const success = new SuccessView(cloneTemplate(successTemplate), {
-				onClick: () => {
-					modal.close();
-					events.emit('order:clear');
-				},
-			});
-
 			modal.render({
 				content: success.render({
 					title: !result.error ? 'Заказ оформлен' : 'Ошибка оформления заказа',
 					description: !result.error ? `Списано ${result.total} синапсов` : result.error,
 				}),
 			});
+			events.emit('order:clear')
 		})
 		.catch(e => console.log(e))
-		.finally(() => events.emit('order:clear'))
 })
 
 // Чистка заказа и корзины
