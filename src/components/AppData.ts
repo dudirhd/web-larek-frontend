@@ -36,6 +36,7 @@ export class AppData extends Model<IAppData> {
 	addProductToBasket(product: IProduct) {
 		if (!this.basket.some(item => item === product)) {
 			this.basket.push(product);
+			this.emitChanges('basket:change', { basket: this.basket });
 		}
 	}
 
@@ -46,7 +47,7 @@ export class AppData extends Model<IAppData> {
 
 	removeProductFromBasket(product: IProduct) {
 		this.basket = this.basket.filter(item => item !== product);
-		this.emitChanges('basket:onDelete');
+		this.emitChanges('basket:change', {basket: this.basket });
 	}
 
 	getOrder() {

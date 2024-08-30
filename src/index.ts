@@ -109,32 +109,19 @@ events.on('modal:close', () => {
 
 // Открытие корзины
 events.on('basket:open', () => {
-	const products = appData.getBasket().map((item, index) => {
-		const product = new ProductInBasketView(cloneTemplate(productInBasket), {
-			onClick: () => events.emit('product:removeFromBasket', item)
-		});
-		return product.render({
-			index: index + 1,
-			id: item.id,
-			title: item.title,
-			price: item.price
-		});
-	});
 	modal.render({
-		content: createElement<HTMLElement>('div', {}, [
-			basket.render({
-				products,
-				total: appData.getTotalPrice()
-			})
-		])
-	});
+		content: basket.render({total: appData.getTotalPrice()})
+	})
 });
 
-events.on('basket:onDelete', () => {
-	const products = appData.getBasket().map((item, index) => {
+// Изменение корзины
+events.on('basket:change', () => {
+	basket.total = appData.getTotalPrice();
+	basket.products = appData.getBasket().map((item, index) => {
 		const product = new ProductInBasketView(cloneTemplate(productInBasket), {
 			onClick: () => events.emit('product:removeFromBasket', item)
 		});
+
 		return product.render({
 			index: index + 1,
 			id: item.id,
@@ -142,10 +129,6 @@ events.on('basket:onDelete', () => {
 			price: item.price
 		});
 	});
-	return basket.render({
-		products,
-		total: appData.getTotalPrice()
-	})
 })
 
 // Удаление из корзины

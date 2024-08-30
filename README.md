@@ -216,6 +216,7 @@ interface ISuccessActions {
 - `modal:close` - закрытие модального окна
 - `product:preview` - открытие модального окна продукта
 - `basket:open` - открытие корзины
+- `basket:change` - обновление списка продуктов в корзине
 - `basket:removeProduct` - удаление продукта из корзины
 - `basket:createOrder` - оформление заказа
 - `form:errorsChanged` - отображение ошибок формы
